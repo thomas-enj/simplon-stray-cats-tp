@@ -1,0 +1,48 @@
+# ==========================================
+# TERRAFORM LOCAL FILES & CACHE
+# ==========================================
+
+# Dossier d'initialisation local et fournisseurs (téléchargés via terraform init)
+.terraform/
+
+# Fichiers de verrouillage des fournisseurs (décommenter si vous ne souhaitez PAS fixer les providers)
+# .terraform.lock.hcl
+
+# ==========================================
+# TERRAFORM STATE FILES (TRÈS IMPORTANT)
+# ==========================================
+# Ne JAMAIS commiter les fichiers de state locaux ou téléchargés !
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+
+# ==========================================
+# VARIABLES & CONFIGURATIONS PRIVÉES
+# ==========================================
+# Fichiers contenant des secrets, identifiants ou configs backend personnelles
+*.tfvars
+*.tfvars.json
+*.tfbackend
+backend.tfvars
+
+# Exceptions : conserver le fichier d'exemple s'il existe
+!example.tfvars
+!*.example.tfvars
+
+# ==========================================
+# LOGS DE CRASH & TEMP
+# ==========================================
+crash.log
+crash.*.log
+*.panic
+
+# ==========================================
+# OS & ÉDITEURS (WSL, Neovim, VSCode)
+# ==========================================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
