@@ -8,13 +8,8 @@ terraform {
     }
   }
 
+  backend "azurerm" {}
 
-  backend "azurerm" {
-    resource_group_name  = "rg-monitoring-groupe1"
-    storage_account_name = "ststatestraycats01"
-    container_name       = "tfstate"
-    key                  = "state_straycats.terraform.tfstate"
-  }
 }
 
 provider "azurerm" {
