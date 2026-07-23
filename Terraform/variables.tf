@@ -21,9 +21,17 @@ variable "team" {
   default     = "stray-cats"
 }
 
+variable "storage_account_container_name" {
+  description = "storage account name"
+  type        = string
+
+}
+
+
 variable "owner" {
   description = "owner name"
   type        = string
+
 }
 
 variable "resource_group_name" {
@@ -36,6 +44,7 @@ variable "resource_group_name" {
 variable "subscription" {
   description = "Simplon OCC"
   type        = string
+  default     = "5e683e0f-b00c-48d6-9769-5aaf598de8f1"
 }
 # ==========================================
 # 2. TAGS DE GOUVERNANCE

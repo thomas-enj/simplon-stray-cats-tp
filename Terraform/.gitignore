@@ -15,7 +15,7 @@
 *.tfstate
 *.tfstate.*
 *.tfstate.backup
-
+terraform.tfvars
 # ==========================================
 # VARIABLES & CONFIGURATIONS PRIVÉES
 # ==========================================

@@ -12,8 +12,10 @@ module "mon_apm" {
 module "network" {
   source = "./modules/network"
 
-  owner    = var.owner
-  location = var.owner
+  resource_group_name            = var.resource_group_name
+  storage_account_container_name = var.storage_account_container_name
+  owner                          = var.owner
+
 }
 
 
