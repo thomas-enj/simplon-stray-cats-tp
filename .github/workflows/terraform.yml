@@ -34,7 +34,7 @@ env:
 jobs:
   tflint:
     name: Terraform Linting
-    if: github.actor != 'dependabot[bot]'
+    if: github.actor != 'dependabot[bot]' && hashFiles('terraform/*.tf') != ''
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -60,7 +60,7 @@ jobs:
   tftest:
     name: Terraform Test
     needs: tflint
-    if: github.actor != 'dependabot[bot]'
+    if: github.actor != 'dependabot[bot]' && hashFiles('terraform/*.tf') != ''
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -97,7 +97,7 @@ jobs:
   plan:
     name: Terraform Plan
     needs: tftest
-    if: github.actor != 'dependabot[bot]'
+    if: github.actor != 'dependabot[bot]' && hashFiles('terraform/*.tf') != ''
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -193,7 +193,7 @@ jobs:
   apply:
     name: Terraform Apply
     needs: plan
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && hashFiles('terraform/*.tf') != ''
     runs-on: ubuntu-latest
     environment: tf-apply
     defaults:
@@ -229,7 +229,7 @@ jobs:
         run: terraform apply -auto-approve
 
   destroy:
-    if: inputs.action == 'destroy'
+    if: inputs.action == 'destroy' && hashFiles('terraform/*.tf') != ''
     runs-on: ubuntu-latest
     environment: tf-destroy
     defaults:
