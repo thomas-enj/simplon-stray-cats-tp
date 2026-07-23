@@ -8,13 +8,6 @@ variable "location" {
   default     = "francecentral"
 }
 
-variable "environment" {
-  description = "Environnement de déploiement (dev, test, prod)"
-  type        = string
-  default     = "dev"
-}
-
-
 variable "team" {
   description = "Team name"
   type        = string
