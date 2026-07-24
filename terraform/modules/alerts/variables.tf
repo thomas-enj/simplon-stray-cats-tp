@@ -100,3 +100,7 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+variable "azure_monitor_workspace_name" {
+  description = "Nom de l'Azure Monitor Workspace existant"
+  type        = string
+}
