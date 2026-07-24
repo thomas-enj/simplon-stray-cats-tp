@@ -2,18 +2,18 @@
 # 1. PARAMÈTRES DU SOCLE AZURE
 # ==========================================
 
-variable "location" {
-  description = "Région Azure principale pour le déploiement"
-  type        = string
-  default     = "francecentral"
-}
+# variable "location" {
+#   description = "Région Azure principale pour le déploiement"
+#   type        = string
+#   default     = "francecentral"
+# }
 
 
-variable "team" {
-  description = "Team name"
-  type        = string
-  default     = "stray-cats"
-}
+# variable "team" {
+#   description = "Team name"
+#   type        = string
+#   default     = "stray-cats"
+# }
 
 variable "storage_account_container_name" {
   description = "storage account name"
@@ -44,11 +44,11 @@ variable "subscription" {
 # 2. TAGS DE GOUVERNANCE
 # ==========================================
 
-variable "tags" {
-  description = "Tags obligatoires appliqués sur l'ensemble des ressources"
-  type        = map(string)
-  default = {
-    Project   = "Observability-Stack"
-    ManagedBy = "Terraform"
-  }
-}
+# variable "tags" {
+#   description = "Tags obligatoires appliqués sur l'ensemble des ressources"
+#   type        = map(string)
+#   default = {
+#     Project   = "Observability-Stack"
+#     ManagedBy = "Terraform"
+#   }
+# }
