@@ -31,6 +31,7 @@ env:
   TF_VAR_owner: ${{ vars.TF_OWNER }}
   TF_VAR_resource_group_name: ${{ vars.TF_RGROUP }}
   TF_VAR_storage_account_container_name: ${{ vars.TF_SA_BACKEND }}
+  TF_VAR_environment: prod
 
 jobs:
   tflint:
