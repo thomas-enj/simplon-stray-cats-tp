@@ -26,20 +26,17 @@ resource "azurerm_network_interface" "nic-prometheus" {
 
 
 resource "azurerm_linux_virtual_machine" "vm" {
-  name                = "vm-prometheus"
-  resource_group_name = data.azurerm_resource_group.data.name
-  location            = data.azurerm_resource_group.data.location
-  size                = "Standard_B2s"
-  admin_username      = "azureuser"
+  name                            = "vm-prometheus"
+  resource_group_name             = data.azurerm_resource_group.data.name
+  location                        = data.azurerm_resource_group.data.location
+  size                            = "Standard_B2s"
+  admin_username                  = "azureuser"
+  admin_password                  = "P@ssw0rdTemp1234!"
+  disable_password_authentication = false
 
   network_interface_ids = [
     azurerm_network_interface.nic-prometheus.id,
   ]
-
-  admin_ssh_key {
-    username   = "azureuser"
-    public_key = file("~/.ssh/id_rsa.pub")
-  }
 
   os_disk {
     caching              = "ReadWrite"
