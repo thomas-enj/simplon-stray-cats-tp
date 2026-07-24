@@ -32,9 +32,7 @@ variable "resource_group_name" {
   type        = string
 }
 
-variable "subnet_id_prometheus" {
-  type = string
-}
+
 
 variable "subscription" {
   description = "Simplon OCC"
@@ -53,10 +51,6 @@ variable "tags" {
     ManagedBy = "Terraform"
   }
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/main
 variable "log_analytics_workspace_name" {
   description = "Nom du Log Analytics Workspace"
   type        = string

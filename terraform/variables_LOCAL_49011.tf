@@ -53,10 +53,7 @@ variable "tags" {
     ManagedBy = "Terraform"
   }
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/main
 variable "log_analytics_workspace_name" {
   description = "Nom du Log Analytics Workspace"
   type        = string

@@ -1,30 +1,13 @@
-# ==========================================
-# MODULE APPLICATION INSIGHTS
-# ==========================================
 
-module "app_insight" {
+
+## APPS 
+
+module "mon_apm" {
   source = "./modules/app_insight"
 
-<<<<<<< HEAD
 }
 
 
-=======
-  resource_group_name          = var.resource_group_name
-  location                     = var.location
-  environment                  = var.environment
-  team                         = var.team
-  log_analytics_workspace_name = var.log_analytics_workspace_name
-  application_insights_name    = var.application_insights_name
-  tags                         = var.tags
-}
-
-
-# ==========================================
-# MODULE RÉSEAU
-# ==========================================
-
->>>>>>> origin/main
 module "network" {
   source = "./modules/network"
 
@@ -34,7 +17,6 @@ module "network" {
   team                           = var.team
   location                       = var.location
   tags                           = var.tags
-<<<<<<< HEAD
 }
 
 module "vm_prometheus" {
@@ -56,6 +38,3 @@ module "vm_prometheus" {
 
 
 
-=======
-}
->>>>>>> origin/main

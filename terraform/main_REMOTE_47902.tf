@@ -5,11 +5,6 @@
 module "app_insight" {
   source = "./modules/app_insight"
 
-<<<<<<< HEAD
-}
-
-
-=======
   resource_group_name          = var.resource_group_name
   location                     = var.location
   environment                  = var.environment
@@ -24,7 +19,6 @@ module "app_insight" {
 # MODULE RÉSEAU
 # ==========================================
 
->>>>>>> origin/main
 module "network" {
   source = "./modules/network"
 
@@ -34,28 +28,4 @@ module "network" {
   team                           = var.team
   location                       = var.location
   tags                           = var.tags
-<<<<<<< HEAD
 }
-
-module "vm_prometheus" {
-  source = "./modules/vm_prometheus"
-
-  resource_group_name            = var.resource_group_name
-  storage_account_container_name = var.storage_account_container_name
-  owner                          = var.owner
-
-  subnet_id_prometheus = module.network.subnet_id_prometheus
-  vnet_id              = module.network.vnet_id
-  nsg_id               = module.network.nsg_id
-
-}
-
-
-
-
-
-
-
-=======
-}
->>>>>>> origin/main
