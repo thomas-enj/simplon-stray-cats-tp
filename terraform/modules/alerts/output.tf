@@ -11,4 +11,5 @@ output "kql_alert_id" {
 output "prometheus_rule_group_id" {
   description = "Identifiant du groupe de règles Prometheus"
   value       = azurerm_monitor_alert_prometheus_rule_group.custom_metric.id
+
 }
