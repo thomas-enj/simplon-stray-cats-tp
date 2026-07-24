@@ -3,7 +3,7 @@ resource "azurerm_public_ip" "pip_prometheus" {
   name                = "pip-prometheus"
   location            = var.location
   resource_group_name = var.resource_group_name
-  allocation_method   = "Dynamic"
+  allocation_method   = "Static"
   sku                 = "Standard"
 }
 
