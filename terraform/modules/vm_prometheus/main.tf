@@ -49,6 +49,22 @@ resource "azurerm_linux_virtual_machine" "vm" {
     sku       = "22_04-lts"
     version   = "latest"
   }
+
+  custom_data = base64encode(<<-EOF
+    #!/bin/bash
+    # Version 3.12.0, PAS 2.53.0 : l'identitÃ© managÃ©e SYSTÃˆME (notre cas, client_id vide
+    # dans prometheus.yml Ã  l'Ã©tape 5) nÃ©cessite Prometheus 3.50+ selon la doc Microsoft.
+    # Avec une version plus ancienne, Prometheus plante au dÃ©marrage avec l'erreur "must
+    # provide an Azure Managed Identity client_id in the Azure AD config".
+    apt-get update
+    apt-get install -y wget
+    useradd --no-create-home --shell /bin/false prometheus
+    wget https://github.com/prometheus/prometheus/releases/download/v3.12.0/prometheus-3.12.0.linux-amd64.tar.gz
+    tar xvf prometheus-3.12.0.linux-amd64.tar.gz
+    cp prometheus-3.12.0.linux-amd64/prometheus /usr/local/bin/
+    mkdir -p /etc/prometheus
+  EOF
+  )
 }
 
 
