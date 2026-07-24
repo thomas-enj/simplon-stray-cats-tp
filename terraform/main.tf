@@ -30,6 +30,30 @@ module "network" {
   tags                           = var.tags
 }
 
+# ==========================================
+# MODULE ALERTES
+# ==========================================
+
+module "alerts" {
+  source = "./modules/alerts"
+
+  resource_group_name          = var.resource_group_name
+  location                     = var.location
+  environment                  = var.environment
+  team                         = var.team
+  tags                         = var.tags
+  azure_monitor_workspace_name = var.azure_monitor_workspace_name
+
+  action_group_name       = var.action_group_name
+  action_group_short_name = var.action_group_short_name
+  alert_email             = var.alert_email
+
+  kql_alert_name             = var.kql_alert_name
+  log_analytics_workspace_id = module.app_insight.log_analytics_workspace_id
+  http_error_threshold       = var.http_error_threshold
+
+  enable_prometheus_alert = false
+}
 module "vm_prometheus" {
   source = "./modules/vm_prometheus"
 

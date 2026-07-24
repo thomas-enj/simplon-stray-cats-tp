@@ -43,4 +43,31 @@ variable "storage_account_container_name" {
   description = "backend storage account name for the tfstate in azure blob container"
 
 }
+variable "action_group_name" {
+  description = "Nom de l'Action Group"
+  type        = string
+  default     = "ag-stray-cats-prod"
+}
 
+variable "action_group_short_name" {
+  description = "Nom court de l'Action Group"
+  type        = string
+  default     = "straycats"
+}
+
+variable "alert_email" {
+  description = "Adresse email destinataire des alertes"
+  type        = string
+}
+
+variable "kql_alert_name" {
+  description = "Nom de l'alerte KQL"
+  type        = string
+  default     = "alert-http-errors-prod"
+}
+
+variable "http_error_threshold" {
+  description = "Seuil d'erreurs HTTP déclenchant l'alerte"
+  type        = number
+  default     = 5
+}
