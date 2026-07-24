@@ -1,6 +1,14 @@
 # ==========================================
+# AZURE MONITOR WORKSPACE EXISTANT
+# ==========================================
+
+data "azurerm_monitor_workspace" "main" {
+  name                = var.azure_monitor_workspace_name
+  resource_group_name = var.resource_group_name
+}
+
+# ==========================================
 # ACTION GROUP
-# Canal de notification des alertes
 # ==========================================
 
 resource "azurerm_monitor_action_group" "main" {
@@ -9,7 +17,7 @@ resource "azurerm_monitor_action_group" "main" {
   short_name          = var.action_group_short_name
 
   email_receiver {
-    name                    = "email-equipe"
+    name                    = "email-alerts"
     email_address           = var.alert_email
     use_common_alert_schema = true
   }
@@ -23,10 +31,8 @@ resource "azurerm_monitor_action_group" "main" {
   )
 }
 
-
 # ==========================================
-# ALERTE APM KQL
-# Détection des erreurs HTTP
+# ALERTE KQL — ERREURS HTTP
 # ==========================================
 
 resource "azurerm_monitor_scheduled_query_rules_alert_v2" "http_errors" {
@@ -38,11 +44,11 @@ resource "azurerm_monitor_scheduled_query_rules_alert_v2" "http_errors" {
     var.log_analytics_workspace_id
   ]
 
-  description          = "Alerte déclenchée lorsque trop de requêtes HTTP échouent"
-  severity             = var.kql_alert_severity
+  description          = "Alerte déclenchée lorsque le nombre de requêtes HTTP en erreur dépasse le seuil défini."
+  severity             = 2
+  enabled              = true
   evaluation_frequency = "PT5M"
   window_duration      = "PT5M"
-  enabled              = true
 
   criteria {
     query = <<-KQL
@@ -53,7 +59,12 @@ resource "azurerm_monitor_scheduled_query_rules_alert_v2" "http_errors" {
 
     time_aggregation_method = "Count"
     threshold               = var.http_error_threshold
-    operator                = "GreaterThan"
+    operator                = "GreaterThanOrEqual"
+
+    failing_periods {
+      minimum_failing_periods_to_trigger_alert = 1
+      number_of_evaluation_periods             = 1
+    }
   }
 
   action {
@@ -71,37 +82,47 @@ resource "azurerm_monitor_scheduled_query_rules_alert_v2" "http_errors" {
   )
 }
 
-
 # ==========================================
-# ALERTE PROMETHEUS / PROMQL
-# Activée seulement si Managed Prometheus existe
+# ALERTE PROMETHEUS
 # ==========================================
 
 resource "azurerm_monitor_alert_prometheus_rule_group" "custom_metric" {
-  count = var.enable_prometheus_alert ? 1 : 0
-
-  name                = var.prometheus_rule_group_name
+  name                = "prometheus-alert-stray-cats-${var.environment}"
   location            = var.location
   resource_group_name = var.resource_group_name
 
-  scopes       = [var.azure_monitor_workspace_id]
-  cluster_name = var.cluster_name
-  interval     = "PT5M"
-  enabled      = true
+  scopes = [
+    data.azurerm_monitor_workspace.main.id
+  ]
+
+  description        = "Alerte Prometheus déclenchée lorsqu'une cible supervisée devient indisponible."
+  interval           = "PT1M"
+  rule_group_enabled = true
 
   rule {
-    alert      = "CustomMetricThresholdExceeded"
-    expression = var.promql_expression
+    alert      = "PrometheusTargetDown"
+    expression = "up == 0"
     for        = "PT5M"
-    severity   = var.prometheus_alert_severity
+    severity   = 2
     enabled    = true
+
+    annotations = {
+      description = "Une cible Prometheus est indisponible depuis au moins cinq minutes."
+      summary     = "Cible Prometheus indisponible"
+    }
+
+    labels = {
+      environment = var.environment
+      team        = var.team
+    }
 
     action {
       action_group_id = azurerm_monitor_action_group.main.id
     }
 
-    annotations = {
-      description = "La métrique Prometheus personnalisée a dépassé le seuil défini."
+    alert_resolution {
+      auto_resolved   = true
+      time_to_resolve = "PT10M"
     }
   }
 
