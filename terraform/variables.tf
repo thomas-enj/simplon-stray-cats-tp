@@ -32,10 +32,6 @@ variable "resource_group_name" {
   type        = string
 }
 
-variable "subnet_id_prometheus" {
-  type = string
-}
-
 variable "subscription" {
   description = "Simplon OCC"
   type        = string
