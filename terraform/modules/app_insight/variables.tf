@@ -1,10 +1,10 @@
-variable "location" {
-  description = "Région Azure des ressources de supervision"
+variable "resource_group_name" {
+  description = "Nom du Resource Group"
   type        = string
 }
 
-variable "resource_group_name" {
-  description = "Nom du groupe de ressources"
+variable "location" {
+  description = "Région Azure"
   type        = string
 }
 
@@ -14,8 +14,14 @@ variable "environment" {
 }
 
 variable "team" {
-  description = "Nom de l'équipe responsable des ressources"
+  description = "Nom de l'équipe"
   type        = string
+}
+
+variable "tags" {
+  description = "Tags appliqués aux ressources Azure"
+  type        = map(string)
+  default     = {}
 }
 
 variable "log_analytics_workspace_name" {
@@ -29,19 +35,13 @@ variable "application_insights_name" {
 }
 
 variable "log_analytics_retention_days" {
-  description = "Durée de conservation des logs en jours"
+  description = "Durée de conservation des journaux dans Log Analytics"
   type        = number
   default     = 30
 }
 
 variable "application_insights_type" {
-  description = "Type d'application supervisée"
+  description = "Type de l'application supervisée par Application Insights"
   type        = string
   default     = "web"
-}
-
-variable "tags" {
-  description = "Tags appliqués aux ressources"
-  type        = map(string)
-  default     = {}
 }
