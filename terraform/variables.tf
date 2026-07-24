@@ -32,8 +32,6 @@ variable "resource_group_name" {
   type        = string
 }
 
-
-
 variable "subscription" {
   description = "Simplon OCC"
   type        = string
@@ -50,7 +48,9 @@ variable "tags" {
     Project   = "Observability-Stack"
     ManagedBy = "Terraform"
   }
+
 }
+
 variable "log_analytics_workspace_name" {
   description = "Nom du Log Analytics Workspace"
   type        = string

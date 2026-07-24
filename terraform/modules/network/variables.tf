@@ -43,3 +43,4 @@ variable "storage_account_container_name" {
   description = "backend storage account name for the tfstate in azure blob container"
 
 }
+
