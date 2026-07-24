@@ -1,8 +1,7 @@
 variable "resource_group_name" {
-  description = "rg-monitoring-groupe1"
+  description = "Nom du groupe de ressources Azure"
   type        = string
 }
-
 
 variable "owner" {
   description = "Learner identifier (firstname-lastname, lowercase, hyphens). Ex: john-doe"
@@ -15,10 +14,9 @@ variable "owner" {
 }
 
 variable "team" {
-  description = "The team in charge of the project name "
+  description = "The team in charge of the project"
   type        = string
-
-  default = "stray-cats"
+  default     = "stray-cats"
 }
 
 variable "location" {
@@ -40,6 +38,6 @@ variable "tags" {
 }
 
 variable "storage_account_container_name" {
-  description = "backend storage account name for the tfstate in azure blob container"
-
+  description = "Backend storage account container name for the Terraform state"
+  type        = string
 }
