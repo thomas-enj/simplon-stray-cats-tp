@@ -29,7 +29,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   name                            = "vm-prometheus"
   resource_group_name             = data.azurerm_resource_group.data.name
   location                        = data.azurerm_resource_group.data.location
-  size                            = "Standard_B2s"
+  size                            = "Standard_D2s_v3"
   admin_username                  = "azureuser"
   admin_password                  = "P@ssw0rdTemp1234!"
   disable_password_authentication = false
