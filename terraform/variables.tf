@@ -62,3 +62,7 @@ variable "application_insights_name" {
   type        = string
   default     = "appi-stray-cats-dev"
 }
+variable "environment" {
+  description = "Environnement de déploiement"
+  type        = string
+}
