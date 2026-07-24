@@ -5,11 +5,6 @@
 module "app_insight" {
   source = "./modules/app_insight"
 
-<<<<<<< HEAD
-}
-
-
-=======
   resource_group_name          = var.resource_group_name
   location                     = var.location
   environment                  = var.environment
@@ -24,7 +19,6 @@ module "app_insight" {
 # MODULE RÉSEAU
 # ==========================================
 
->>>>>>> origin/main
 module "network" {
   source = "./modules/network"
 
@@ -34,7 +28,6 @@ module "network" {
   team                           = var.team
   location                       = var.location
   tags                           = var.tags
-<<<<<<< HEAD
 }
 
 module "vm_prometheus" {
