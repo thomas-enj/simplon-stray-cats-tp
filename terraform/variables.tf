@@ -8,13 +8,6 @@ variable "location" {
   default     = "francecentral"
 }
 
-variable "environment" {
-  description = "Environnement de déploiement (dev, test, prod)"
-  type        = string
-  default     = "dev"
-}
-
-
 variable "team" {
   description = "Team name"
   type        = string
@@ -39,7 +32,9 @@ variable "resource_group_name" {
   type        = string
 }
 
-
+variable "subnet_id_prometheus" {
+  type = string
+}
 
 variable "subscription" {
   description = "Simplon OCC"
@@ -57,4 +52,20 @@ variable "tags" {
     Project   = "Observability-Stack"
     ManagedBy = "Terraform"
   }
+}
+
+variable "log_analytics_workspace_name" {
+  description = "Nom du Log Analytics Workspace"
+  type        = string
+  default     = "law-stray-cats-dev"
+}
+
+variable "application_insights_name" {
+  description = "Nom de la ressource Application Insights"
+  type        = string
+  default     = "appi-stray-cats-dev"
+}
+variable "environment" {
+  description = "Environnement de déploiement"
+  type        = string
 }

@@ -47,6 +47,15 @@ resource "azurerm_subnet" "subnet-backend" {
 
 }
 
+
+resource "azurerm_subnet" "subnet-prometheus" {
+  name                 = "subnet_${var.team}_prometheus-tf"
+  resource_group_name  = data.azurerm_resource_group.data.name
+  virtual_network_name = azurerm_virtual_network.virtualnetwork_straycat.name
+  address_prefixes     = ["10.0.3.0/24"]
+
+}
+
 resource "azurerm_network_security_group" "SecurityGroup" {
   name                = "SecurityGroupSubnetStorage"
   location            = data.azurerm_resource_group.data.location
@@ -65,4 +74,9 @@ resource "azurerm_network_security_rule" "NSG-RuleSSH" {
   destination_address_prefix  = "*"
   resource_group_name         = data.azurerm_resource_group.data.name
   network_security_group_name = azurerm_network_security_group.SecurityGroup.name
+}
+
+resource "azurerm_subnet_network_security_group_association" "subnet_nsg" {
+  subnet_id                 = azurerm_subnet.subnet-prometheus.id
+  network_security_group_id = azurerm_network_security_group.SecurityGroup.id
 }
