@@ -4,13 +4,6 @@ variable "resource_group_name" {
 }
 
 
-variable "admin_password" {
-  type        = string
-  description = "Mot de passe de la VM"
-  sensitive   = true
-}
-
-
 variable "owner" {
   description = "Learner identifier (firstname-lastname, lowercase, hyphens). Ex: john-doe"
   type        = string
