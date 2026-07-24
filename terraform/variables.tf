@@ -51,3 +51,14 @@ variable "tags" {
     ManagedBy = "Terraform"
   }
 }
+variable "log_analytics_workspace_name" {
+  description = "Nom du Log Analytics Workspace"
+  type        = string
+  default     = "law-stray-cats-dev"
+}
+
+variable "application_insights_name" {
+  description = "Nom de la ressource Application Insights"
+  type        = string
+  default     = "appi-stray-cats-dev"
+}
